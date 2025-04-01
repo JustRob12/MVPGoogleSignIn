@@ -1,0 +1,28 @@
+{
+  "name": "mvp-google-signin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-google-signin/google-signin": "^10.0.1",
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "axios": "^1.6.7",
+    "expo": "~50.0.5",
+    "expo-status-bar": "~1.11.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.73.2",
+    "react-native-web": "~0.19.6",
+    "react-native-keychain": "^8.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.2.45",
+    "typescript": "^5.1.3"
+  }
+} 
