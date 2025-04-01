@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { AuthModel } from '../model/AuthModel';
 
 class ApiService {
@@ -29,7 +29,7 @@ class ApiService {
   private setupInterceptors(): void {
     // Request interceptor
     this.api.interceptors.request.use(
-      async (config: AxiosRequestConfig) => {
+      async (config: InternalAxiosRequestConfig) => {
         const token = await this.authModel.getToken();
         if (token && config.headers) {
           config.headers.Authorization = `Bearer ${token}`;

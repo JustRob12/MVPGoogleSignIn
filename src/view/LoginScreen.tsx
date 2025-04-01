@@ -7,7 +7,7 @@ export const LoginScreen: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [presenter] = useState(() => new AuthPresenter(new LoginScreenView(this)));
+  const [presenter] = useState(() => new AuthPresenter(new LoginScreenView(setUser, setLoading, setError)));
 
   useEffect(() => {
     presenter.checkAuthState();
@@ -53,30 +53,36 @@ export const LoginScreen: React.FC = () => {
 };
 
 class LoginScreenView implements AuthView {
-  constructor(private screen: LoginScreen) {}
+  constructor(
+    private setUser: (user: User | null) => void,
+    private setLoading: (loading: boolean) => void,
+    private setError: (error: string | null) => void
+  ) {}
 
   onSignInSuccess(user: User): void {
-    this.screen.setState({ user, error: null });
+    this.setUser(user);
+    this.setError(null);
   }
 
   onSignInError(error: Error): void {
-    this.screen.setState({ error: error.message });
+    this.setError(error.message);
   }
 
   onSignOutSuccess(): void {
-    this.screen.setState({ user: null, error: null });
+    this.setUser(null);
+    this.setError(null);
   }
 
   onSignOutError(error: Error): void {
-    this.screen.setState({ error: error.message });
+    this.setError(error.message);
   }
 
   onLoadingStart(): void {
-    this.screen.setState({ loading: true });
+    this.setLoading(true);
   }
 
   onLoadingEnd(): void {
-    this.screen.setState({ loading: false });
+    this.setLoading(false);
   }
 }
 
